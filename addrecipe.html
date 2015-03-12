@@ -1,19 +1,35 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>My Daily Meal. Daily recipes with weekly grocery shopping.</title>
+    <title>Add recipe to your collection.</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <script type="text/javascript" charset="utf-8" src="js/jquery-2.1.3.min.js"></script>
     </head>
     <body>
 		<form method="post">
-		Ingredients:<br>
-		<input type="text" name="ingredients" value="...">
-		<br>
-		Directions:<br>
-		<input type="text" name="directions" value="...">
-		<br><br>
+		Title
+		<input type="text" name="recipetitle" value="">
+		Course 
+		<select required name="course">
+		  <option value="appetizers">Appetizers</option>
+		  <option value="breakfast">Breakfast</option>
+		  <option value="lunch">Lunch</option>
+		  <option value="dinner">Dinner</option>
+		  <option value="salads">Salads</option> 
+		  <option value="Sauces">Sauces</option> 
+		  <option value="snacks">Snacks</option> 
+		  <option value="beverages">Beverages</option>
+		  <option value="desserts">Desserts</option> 
+		  <option value="breads">Breads</option>
+		</select>
+		<span>Description</span>
+		<input type="text" name="recdescription" value="">
+		<span>Total cooking time</span>
+		<input type="text" name="cooktime" value="">
+		<span>Servings</span>
+		<input type="text" name="servings" value="">
+		<span>Ingredints</span>
+
 		<input type="submit" value="Submit">
 		</form>
 	</body>
