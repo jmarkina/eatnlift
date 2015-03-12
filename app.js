@@ -1,79 +1,45 @@
 var mongojs = require('mongojs');
 var express = require('express');
+var bodyParser = require('body-parser');
 
 var uri = "mongodb://localhost/recipes",
     db = mongojs.connect(uri);
 var app = express();
 
-app.get('/', function (req,res) {
-   res.sendfile('./addrecipe.html')
-});
-
-app.post('/addrecipe', function (req,res) {
-   
-});
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  	extended: true
+}));
 
 var server = app.listen(3000, function () {
-
-  var host = server.address().address
-  var port = server.address().port
-
+  	var host = server.address().address;
+  	var port = server.address().port;
 });
 
+// routes
 
-// Get our form values. These rely on the "name" attributes
-// var recipeTitle = req.body.recipetitle;
-// var description = req.body.recdescription;
-// var time = req.body.cooktime;
-// var servings = req.body.servings;
+app.get('/', function (req, res) {
+   	res.sendfile('./addrecipe.html');
+});
 
-// Getting value from drop-down form
-// var selected_course = oForm.elements["course"].selectedIndex;
+app.post('/', function (req, res) {
+    var collection = db.collection('recipes');
 
-// 	if(selected_course > 0)
-// 	{
-// 	   var selected_option_value = oForm.elements["course"].options[selected_course].value;
-// 	   var selected_option_text = oForm.elements["course"].options[selected_course].text;
-// 	}
-// 	else
-// 	{
-// 	   alert('Please select a course from the drop down list');
-// 	};
+    // Submit to the DB
+    collection.insert({
+        "title" : req.body.title,
+        "course" : req.body.course,
+        "description" : req.body.description,
+        "time" : req.body.cooktime,
+        "servings" : req.body.servings
+    }, function (err, doc) {
+        if (err) {
+            // TODO: write failure message into session
+        }
+        else {
+            // TODO: write success message into session
+        }
+    });
 
-//     // Set our collection
-//     var collection = db.get('mongodb://localhost/recipes');
-
-//     // Submit to the DB
-//     collection.insert({
-//         "title" : recipeTitle,
-//         "course" : selected_course,
-//         "description" : description,
-//         "time" : time,
-//         "servings" : servings
-//     }, function (err, doc) {
-//         if (err) {
-//             // If it failed, return error
-//             res.send("There was a problem adding the information to the database.");
-//         }
-//         else {
-//             // If it worked, set the header so the address bar doesn't still say /adduser
-//             res.location("mongodb://localhost/recipes");
-//             // And forward to success page
-//             res.redirect("index.html");
-//         }
-//     });
-// });
-
-// var recipeProvider = new RecipeProvider('localhost', 27017);
-
-// app.post('/recipes', function(req, res){
-//     recipeProvider.save({
-//         title: req.param('recipetitle'),
-//         course: req.param('selected_course'),
-//         description: req.param('recdescription'),
-//         time:  req.param('cooktime'),
-//         servings: req.param('servings')
-//     }, function(error, docs) {
-//             res.redirect('/')
-//     });
-// });
+	res.redirect('/');
+});
