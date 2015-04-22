@@ -14,16 +14,22 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 var server = app.listen(3000, function () {
   	var host = server.address().address;
   	var port = server.address().port;
+
 });
 
 // routes
 
 app.get('/', function (req, res) {
-   	res.sendfile('./addrecipe.html');
+   	res.sendfile('./index.html');
 });
 
-app.post('/', function (req, res) {
+app.get('/add', function (req, res) {
+    res.sendfile('./addrecipe.html');
+});
+
+app.post('/add', function (req, res) {
     var collection = db.collection('recipes');
+    console.log(req.body);
 
     // Submit to the DB
     collection.insert({
@@ -31,7 +37,13 @@ app.post('/', function (req, res) {
         "course" : req.body.course,
         "description" : req.body.description,
         "time" : req.body.cooktime,
-        "servings" : req.body.servings
+        "servings" : req.body.servings,
+        "qty" : req.body.qty,
+        "measure" : req.body.measure,
+        "ingredient" : req.body.item,
+        "directions" : req.body.directions,
+        "extra_notes" : req.body.extra_notes
+
     }, function (err, doc) {
         if (err) {
             // TODO: write failure message into session

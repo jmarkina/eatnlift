@@ -7,29 +7,46 @@
     </head>
     <body>
         <form method="post">
-            Title
-            <input type="text" name="title" value="">
-            Course 
-            <select required name="course">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" value="">
+            <label for="course">Course</label>
+            <select required name="course" id="course">
               <option value="appetizers">Appetizers</option>
               <option value="breakfast">Breakfast</option>
               <option value="lunch">Lunch</option>
               <option value="dinner">Dinner</option>
-              <option value="salads">Salads</option> 
+              <option value="salads">Salads</option>
+              <option value="meats">Meats</option>
+              <option value="sides">Side Dishes</option> 
               <option value="Sauces">Sauces</option> 
               <option value="snacks">Snacks</option> 
               <option value="beverages">Beverages</option>
               <option value="desserts">Desserts</option> 
               <option value="breads">Breads</option>
             </select>
-            <span>Description</span>
-            <input type="text" name="description" value="">
-            <span>Total cooking time</span>
-            <input type="text" name="cooktime" value="">
-            <span>Servings</span>
-            <input type="text" name="servings" value="">
-            <span>Ingredints</span>
-
+            <label for="description">Description</label>
+            <input type="text" name="description" id="description" value="">
+            <label for="cooktime">Total cooking time</label>
+            <input type="text" name="cooktime" id="cooktime" value="">
+            <label for="servings">Servings</label>
+            <input type="text" name="servings" id="servings" value="">
+            <div class="Ingreds">
+            <label for="ingredients">Ingredients</label>
+                <ul>
+                    <li>Quantity</li>
+                    <li>Measure</li>
+                    <li>Ingredient</li>
+                    <li>Notes</li>
+                </ul>
+            <input type="text" name="qty[0]" value="">
+            <input type="text" name="measure[0]" value="">
+            <input type="text" name="item[0]" value="">
+            <input type="text" name="notes[0]" value="">
+            </div>
+            <label for="directions">Directions</label>
+            <textarea name="directions" value=""></textarea>
+            <label for="extra_notes">Public notes: What would you tell a friend to ensure they make it perfectly?</label>
+            <input type="text" name="extra_notes" id="extra_notes" value="">
             <input type="submit" value="Submit">
         </form>
     </body>
